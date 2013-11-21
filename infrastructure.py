@@ -95,7 +95,7 @@ def solve_probem(app, infrastructure, storage, deadline):
 
     ## Objective
 
-    problem += pulp.lpSum([
+    problem += sum([
         (
             (instance_deadline(i) * NumberInstances[i] + TailTaskHours[i]) * instances[i].price
             + TaskAssignment[i] * (request_price + transfer_cost(i))
@@ -113,9 +113,9 @@ def solve_probem(app, infrastructure, storage, deadline):
         problem += TailTaskHours[i] <= max(deadline - 1, 0) * HasTail[i], 'SetHasTailUpperBound_' + i
 
     for p in providers.values():
-        problem += pulp.lpSum([HasTail[i] + NumberInstances[i] for i in p.instances.keys()]) <= p.max_machines, 'MaxMachines_' + p.name
+        problem += sum([HasTail[i] + NumberInstances[i] for i in p.instances.keys()]) <= p.max_machines, 'MaxMachines_' + p.name
 
-    problem += pulp.lpSum(TaskAssignment.values()) == total_tasks, 'SumTasks'
+    problem += sum(TaskAssignment.values()) == total_tasks, 'SumTasks'
 
 
     problem.solve()
