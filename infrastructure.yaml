@@ -1,0 +1,112 @@
+queue:
+  request_price: 0.00001
+storage:
+  providers:
+    s3: &storage_s3
+      transfer:
+        price_in: 0.0
+        price_out: 0.0001
+    cf: &storage_cf
+      transfer:
+        price_in: 0.0
+        price_out: 0.00018     
+
+compute:
+  providers:
+    amazon: &compute_amazon
+      max_machines: 20
+      transfer:
+        price_in: 0.0
+        price_out: 0.0001
+        local:
+          - s3
+      instances:
+        m2.4xlarge:
+          price: 2.400000
+          ccu: 27.250000
+        m2.2xlarge:
+          price: 1.200000
+          ccu: 14.890000
+        linux.c1.xlarge:
+          price: 0.680000
+          ccu: 8.780000
+        m2.xlarge:
+          price: 0.500000
+          ccu: 7.050000
+        m1.xlarge:
+          price: 0.680000
+          ccu: 5.150000
+        m1.large:
+          price: 0.340000
+          ccu: 4.080000
+        c1.medium:
+          price: 0.170000
+          ccu: 3.430000
+        m1.small:
+          price: 0.085000
+          ccu: 0.920000
+    rackspace: &compute_rackspace
+      max_machines: 15
+      transfer:
+        price_in: 0.0
+        price_out: 0.00018
+        local:
+          - cf
+      instances:
+        rs-16gb:
+          price: 0.960000
+          ccu: 4.950000
+        rs-2gb:
+          price: 0.120000
+          ccu: 4.940000
+        rs-1gb:
+          price: 0.060000
+          ccu: 4.930000
+        rs-4gb:
+          price: 0.240000
+          ccu: 4.900000
+    gogrid: &compute_gogrid
+      max_machines: 10
+      transfer:
+        price_in: 0.0
+        price_out: 0.00029
+      instances:        
+        gg-8gb:
+          price: 1.520000
+          ccu: 23.200000
+        gg-4gb:
+          price: 0.760000
+          ccu: 9.280000
+        gg-2gb:
+          price: 0.380000
+          ccu: 4.870000
+        gg-1gb:
+          price: 0.190000
+          ccu: 4.420000
+    elastichosts: &compute_elastichosts
+      max_machines: 20
+      transfer:
+        price_in: 0.0
+        price_out: 0.00030
+      instances:  
+        eh-8gb-20gh:
+          price: 0.654000
+          ccu: 9.980000
+        eh-4gb-8gh:
+          price: 0.326000
+          ccu: 5.540000
+        eh-2gb-4gh:
+          price: 0.164000
+          ccu: 4.750000
+        eh-1gb-2gh:
+          price: 0.082000
+          ccu: 4.300000
+    private: &compute_private
+      max_machines: 10
+      transfer:
+        price_in: 0.0
+        price_out: 0.0
+      instances:
+        private:
+          price: 0.000000
+          ccu: 1.000000
